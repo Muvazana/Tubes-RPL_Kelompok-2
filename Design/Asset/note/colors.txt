@@ -1,0 +1,4 @@
+bakcground : #fdf8f4
+dark-blue : #403C56
+light-blue : #8EBADF
+pink : #F17583
