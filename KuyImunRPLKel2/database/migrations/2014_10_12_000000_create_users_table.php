@@ -20,6 +20,12 @@ return new class extends Migration
             $table->string('password', 255);
             $table->enum('role', ['super_admin', 'admin', 'member'])->default('member')->nullable();
             $table->string('api_token')->nullable();
+            $table->id();
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password');
+            $table->rememberToken();
             $table->timestamps();
         });
     }
