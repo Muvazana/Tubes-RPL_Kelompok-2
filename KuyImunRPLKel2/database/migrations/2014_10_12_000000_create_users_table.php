@@ -14,6 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('username', 255)->unique();
+            $table->string('email', 255)->unique();
+            $table->string('password', 255);
+            $table->enum('role', ['super_admin', 'admin', 'member'])->default('member')->nullable();
+            $table->string('api_token')->nullable();
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
