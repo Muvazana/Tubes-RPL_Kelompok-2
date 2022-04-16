@@ -35,6 +35,30 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+    
+    public function hasRole($role)
+    {
+        if($this->role == $role)
+        { 
+            return true; 
+        } 
+        else 
+        { 
+            return false; 
+        }
+    }
+
+    // public function isAdmin()
+    // {
+    //     if($this->role == 'super_admin' || $this->role == 'admin')
+    //     { 
+    //         return true; 
+    //     } 
+    //     else 
+    //     { 
+    //         return false; 
+    //     }
+    // }
 
     public function user_super_admins()
     {
