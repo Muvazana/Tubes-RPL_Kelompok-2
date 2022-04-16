@@ -17,10 +17,10 @@ return new class extends Migration
             $table->increments('id');
             $table->integer('vaksin_location_id')->unsigned();
             $table->integer('data_vaksin_id')->unsigned();
-            $table->string('stok')->default(0);
+            $table->string('stok')->default(0)->nullable();
 
-            $table->foreign('vaksin_location_id')->references('id')->on('vaksin_locations');
-            $table->foreign('data_vaksin_id')->references('id')->on('data_vaksins');
+            $table->foreign('vaksin_location_id')->references('id')->on('vaksin_locations')->onDelete('cascade');
+            $table->foreign('data_vaksin_id')->references('id')->on('data_vaksins')->onDelete('cascade');
             $table->timestamps();
         });
     }

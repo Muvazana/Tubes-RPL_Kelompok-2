@@ -19,10 +19,11 @@ return new class extends Migration
             $table->integer('vaksin_location_id')->unsigned();
             $table->integer('data_vaksin_id')->unsigned();
             $table->enum('status', ['accepted', 'rejected', 'pending'])->default('pending')->nullable();
+            $table->date('vaksination_date');
 
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('vaksin_location_id')->references('id')->on('vaksin_locations');
-            $table->foreign('data_vaksin_id')->references('id')->on('data_vaksins');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('vaksin_location_id')->references('id')->on('vaksin_locations')->onDelete('cascade');
+            $table->foreign('data_vaksin_id')->references('id')->on('data_vaksins')->onDelete('cascade');
             $table->timestamps();
         });
     }
