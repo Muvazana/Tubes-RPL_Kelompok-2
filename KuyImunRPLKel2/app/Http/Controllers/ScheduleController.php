@@ -7,8 +7,18 @@ use Illuminate\Http\Request;
 
 use App\Models\VaksinLog;
 
+/**
+ * @group  Schedule Controller
+ *
+ * This controller contain all fiture for Scheduling
+ */
 class ScheduleController extends Controller
 {
+    /**
+     * Show a Schedule Location Page
+     * 
+     * @return location
+     */
     public function scheduleLocationView(){
 
         return view('Schedule/LocationProses')->with([
