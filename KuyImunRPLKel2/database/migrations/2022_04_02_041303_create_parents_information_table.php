@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('name', 255);
             $table->enum('parent_type', ['father', 'mother',])->default('father')->nullable();
 
-            $table->foreign('user_id')->references('user_id')->on('user_members');
+            $table->foreign('user_id')->references('user_id')->on('user_members')->onDelete('cascade');
             $table->timestamps();
         });
     }

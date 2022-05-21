@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('child_name', 255);
             $table->enum('child_gender', ['laki_laki', 'perempuan',])->default('laki_laki')->nullable();
             $table->date('child_birth_date');
-            $table->string('phone_number', 255);
+            $table->string('phone_number', 100);
             $table->text('address');
             $table->text('optional_address')->nullable();
             $table->string('zip_code', 20);
@@ -30,7 +30,7 @@ return new class extends Migration
             $table->text('document_path');
             $table->enum('status', ['verified', 'not_verified',])->default('not_verified')->nullable();
 
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

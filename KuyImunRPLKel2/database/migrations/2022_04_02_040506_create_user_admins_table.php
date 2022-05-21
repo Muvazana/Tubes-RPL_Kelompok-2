@@ -18,8 +18,8 @@ return new class extends Migration
             $table->integer('vaksin_location_id')->unsigned();
             $table->string('name', 255);
 
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('vaksin_location_id')->references('id')->on('vaksin_locations');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('vaksin_location_id')->references('id')->on('vaksin_locations')->onDelete('cascade');
             $table->timestamps();
         });
     }
