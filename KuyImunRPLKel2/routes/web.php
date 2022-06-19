@@ -18,15 +18,47 @@ Route::get('/', function () {
 Route::get('/login', function () {
     return view('login');
 });
-Route::get('/admin/home', function () {
+Route::get('/superadmin', function () {
+    return view('superadmin.index');
+});
+Route::get('/superadmin/vaccine', function () {
+    return view('superadmin.vaccine');
+});
+Route::get('/superadmin/administrator', function () {
+    return view('superadmin.administrator');
+});
+Route::get('/superadmin/administrator/add', function () {
+    return view('superadmin.administrator-add');
+});
+Route::get('/superadmin/patient', function () {
+    return view('superadmin.patient');
+});
+
+
+
+Route::get('/admin', function () {
     return view('admin.index');
 });
-Route::get('/admin/vaccine', function () {
-    return view('admin.beach');
+Route::get('/admin/schedule', function () {
+    return view('admin.schedule');
 });
-Route::get('/admin/administrator', function () {
-    return view('admin.administrator');
+Route::get('/admin/vaccine', function () {
+    return view('admin.vaccine');
+});
+Route::get('/admin/vaccine/add', function () {
+    return view('admin.vaccine-add');
 });
 Route::get('/admin/patient', function () {
     return view('admin.patient');
+});
+Route::get('/admin/log', function () {
+    return view('admin.log');
+});
+
+
+Route::get('/user/log', function () {
+    return view('user.log');
+});
+Route::get('/user/schedule', function () {
+    return view('user.schedule');
 });

@@ -8,9 +8,9 @@
 <body class="h-full">
     <div>
         <!-- Static sidebar for desktop -->
-        @include('admin.sidebar')
+        @include('superadmin.sidebar')
         <div class="md:pl-64 flex flex-col flex-1">
-            @include('admin.header')
+            @include('superadmin.header')
             <main>
                 <div class="py-6">
                     <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">

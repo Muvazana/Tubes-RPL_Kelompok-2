@@ -2,11 +2,7 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    @include('head')
 </head>
 
 <body>
@@ -33,31 +29,22 @@
                         <p class="text-3xl font-semibold">Login to your account</p>
                         <form action="{{ url('/loginAction') }}" method="post">
                             @csrf
-                            <p class="text-base">Email</p>
-                            <input type="email"
-                                class=" mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                                placeholder="ambatukam@example.com" name="email" id="email" required>
+                            <p class="text-base">Username</p>
+                            <input type="text" class=" mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="stevengrant1" name="username" id="username" required>
                             <p class="text-base">Password</p>
-                            <input type="password"
-                                class=" mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                                placeholder="" name="password" id="password" required>
+                            <input type="password" class=" mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="" name="password" id="password" required>
                             <div class="flex justify-between">
                                 <label class="inline-flex items-center">
-                                    <input type="checkbox"
-                                        class="rounded-full border-gray-300 text-green-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-offset-0 focus:ring-indigo-200 focus:ring-opacity-50">
+                                    <input type="checkbox" class="rounded-full border-gray-300 text-green-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-offset-0 focus:ring-indigo-200 focus:ring-opacity-50">
                                     <span class="ml-2">Remember me</span>
                                 </label>
-                                <a href=""
-                                    class="font-normal text-base text-green-600 justify-end hover:text-green-800">Forgot
+                                <a href="" class="font-normal text-base text-green-600 justify-end hover:text-green-800">Forgot
                                     password?</a>
                             </div>
-                            <button type="submit"
-                                class="rounded text-white bg-cyan-600 w-full py-3 mt-7 hover:bg-cyan-700">Login
+                            <button type="submit" class="rounded text-white bg-cyan-600 w-full py-3 mt-7 hover:bg-cyan-700">Login
                                 now</button>
                         </form>
-                        <p class="flex justify-center text-gray-500 font-normal pt-5">Dont have an account? &nbsp;<a
-                                href="/register"
-                                class="font-normal text-base text-blue-400 justify-end hover:text-blue-500">Register
+                        <p class="flex justify-center text-gray-500 font-normal pt-5">Dont have an account? &nbsp;<a href="/register" class="font-normal text-base text-blue-400 justify-end hover:text-blue-500">Register
                                 Now</a>
                         </p>
                     </div>
@@ -67,9 +54,7 @@
                 </div>
             </div>
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-            crossorigin="anonymous"></script>
+        @include('body')
 </body>
 
 </html>
