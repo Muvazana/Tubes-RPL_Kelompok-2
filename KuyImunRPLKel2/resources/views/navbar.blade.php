@@ -14,7 +14,9 @@
             <li class="hover:text-gray-400">
                 <a href="/login">Login</a>
             </li>
-            <li class="hover:text-gray-400">Register</li>
+            <li class="hover:text-gray-400">
+                <a href="/register">Login</a>
+            </li>
         </ul>
     </div>
 </nav>
