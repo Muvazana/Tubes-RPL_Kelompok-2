@@ -131,7 +131,7 @@ class SuperAdminController extends Controller
             DB::rollback();
             return redirect()->back()->withErrors(['msg' => $exception->getMessage()]);
         }
-        return redirect()->back()->with(['success' => "Add Administrator Sucess!"]);
+        return redirect()->back()->with(['success' => "Edit Administrator Sucess!"]);
     }
 
     public function deleteAdministratorAction($id){
