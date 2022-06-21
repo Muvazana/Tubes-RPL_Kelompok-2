@@ -15,25 +15,23 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('index');
 });
-Route::get('/login', function () {
-    return view('login');
-});
-Route::get('/superadmin', function () {
-    return view('superadmin.index');
-});
-Route::get('/superadmin/vaccine', function () {
-    return view('superadmin.vaccine');
-});
-Route::get('/superadmin/administrator', function () {
-    return view('superadmin.administrator');
-});
-Route::get('/superadmin/administrator/add', function () {
-    return view('superadmin.administrator-add');
-});
-Route::get('/superadmin/patient', function () {
-    return view('superadmin.patient');
-});
+Route::get('/login', "AuthController@login")->name("login");
+Route::post('/loginAction', "AuthController@loginAction");
+Route::get('/logoutAction', "AuthController@logoutAction");
+Route::post('/registerMemberAction', "AuthController@registerMemberAction");
 
+Route::group(['middleware' => ['auth.basic', 'role:super_admin']], function () {
+    Route::get('/superadmin', "SuperAdminController@index")->name("superAdminDashboard");
+    Route::get('/superadmin/vaccine', "SuperAdminController@vaccine");
+    Route::get('/superadmin/administrator', "SuperAdminController@administrator");
+    Route::get('/superadmin/administrator/add', "SuperAdminController@addAdministrator");
+    Route::get('/superadmin/administrator/edit/{id}', "SuperAdminController@editAdministrator");
+    Route::get('/superadmin/administrator/delete/{id}', "SuperAdminController@deleteAdministratorAction");
+    Route::get('/superadmin/patient', "SuperAdminController@patient");
+    
+    Route::post('/superadmin/addVaksinLocationAction', "SuperAdminController@addVaksinLocationAction");
+    Route::post('/superadmin/registerAdminAction', "SuperAdminController@registerAdminAction");
+});
 
 
 Route::get('/admin', function () {

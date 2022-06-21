@@ -20,9 +20,14 @@
                             {{ session('success') }}
                         </div>
                         @endif
-                        @if (session()->has('fail_login'))
+                        {{-- @if (session()->has('fail_login'))
                         <div class="alert alert-danger" role="alert">
                             {{ session('fail_login') }}
+                        </div>
+                        @endif --}}
+                        @if ($errors->any())
+                        <div class="alert alert-danger" role="alert">
+                            {{ $errors->first() }}
                         </div>
                         @endif
                         <p class="text-lg text-gray-500">Welcome to Kuy Imun</p>
