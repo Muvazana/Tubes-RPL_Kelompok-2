@@ -61,11 +61,12 @@
                                         </div>
                                     </div>
                                     <div class="sm:col-span-5">
-                                        <label for="vaksin_location_id" class="block text-sm font-medium text-gray-700"> vaksin_location_id
+                                        <label for="vaksin_location_id" class="block text-sm font-medium text-gray-700"> Location
                                         </label>
-                                        <div class="mt-1 flex rounded-md shadow-sm">
-                                            <input type="text" value="{{isset($data) ? $data->user_admins->vaksin_location_id : ''}}" name="vaksin_location_id" id="vaksin_location_id" autocomplete="vaksin_location_id" class="flex-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full min-w-0 rounded sm:text-sm border-gray-300">
-                                        </div>
+                                        <select name="location" class="block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                            <option>Location 1</option>
+                                            <option>Location 2</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="pt-5">

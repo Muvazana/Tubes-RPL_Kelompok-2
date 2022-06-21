@@ -28,6 +28,12 @@ Route::group(['middleware' => ['auth.basic', 'role:super_admin']], function () {
     Route::get('/superadmin/administrator/edit/{id}', "SuperAdminController@editAdministrator");
     Route::get('/superadmin/administrator/delete/{id}', "SuperAdminController@deleteAdministratorAction");
     Route::get('/superadmin/patient', "SuperAdminController@patient");
+    Route::get('/superadmin/location', function () {
+        return view('superadmin.location');
+    });
+    Route::get('/superadmin/location/add', function () {
+        return view('superadmin.location-add-edit');
+    });
     
     Route::post('/superadmin/addVaksinLocationAction', "SuperAdminController@addVaksinLocationAction");
     Route::post('/superadmin/registerAdminAction', "SuperAdminController@registerAdminAction");
