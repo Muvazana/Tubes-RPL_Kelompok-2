@@ -46,6 +46,9 @@ Route::get('/admin', function () {
 Route::get('/admin/schedule', function () {
     return view('admin.schedule');
 });
+Route::get('/admin/schedule/edit', function () {
+    return view('admin.schedule-edit');
+});
 Route::get('/admin/vaccine', function () {
     return view('admin.vaccine');
 });
@@ -55,14 +58,24 @@ Route::get('/admin/vaccine/add', function () {
 Route::get('/admin/patient', function () {
     return view('admin.patient');
 });
+Route::get('/admin/patient/edit', function () {
+    return view('admin.patient-edit');
+});
 Route::get('/admin/log', function () {
     return view('admin.log');
 });
 
 
+Route::get('/register', function () {
+    return view('register');
+});
 Route::get('/user/log', function () {
     return view('user.log');
 });
 Route::get('/user/schedule', function () {
     return view('user.schedule');
+});
+
+Route::get('/notfound', function () {
+    return view('error');
 });

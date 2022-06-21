@@ -37,7 +37,7 @@
                                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Steven Grant</td>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">true</td>
                                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-3 w-10">
-                                                <a href="" class="px-5 py-2 bg-blue-500 rounded-md text-white">Edit</a>
+                                                <a href="/admin/schedule/edit" class="px-5 py-2 bg-blue-500 rounded-md text-white">Edit</a>
                                                 <button class="px-5 py-2 bg-red-500 rounded-md text-white" data-id="">Delete</button>
                                             </td>
                                             </tr>
