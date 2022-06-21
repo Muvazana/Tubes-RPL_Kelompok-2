@@ -37,7 +37,8 @@ class AuthController extends Controller
             }
 
             if(Auth::loginUsingId($data->id)){
-                return redirect()->route("superAdminDashboard");
+                if(Auth::user()->role == "super_admin") return redirect()->route("superAdminDashboard");
+                else if(Auth::user()->role == "admin") return redirect()->route("adminDashboard");
             }
         } catch (\Exception $exception) {
             return redirect()->back()->withErrors(['msg' => $exception->getMessage()]);

@@ -21,10 +21,101 @@ class SuperAdminController extends Controller
     {
         return view('superadmin.index');
     }
+
+    // 
+    //
+    // vaccine
+    //
+    //
     public function vaccine()
     {
         $data = DataVaksin::get();
         return view('superadmin.vaccine')->with(["data" => $data]);
+    }
+    public function addVaccine()
+    {
+        return view('superadmin.vaccine-add-edit')->with([
+            'title' => "Add Vaccine",
+            'url' => "/superadmin/vaccine/addAction",
+        ]);
+    }
+    
+    public function addVaccineAction(Request $request)
+    {
+        try {
+            $request->validate([
+                'code' => 'required',
+                'name' => 'required',
+            ]);
+
+            DB::beginTransaction();
+            $data = DataVaksin::create([
+                'code' => strtoupper($request->input('code')),
+                'name' => $request->input('name'),
+                'description' => $request->input('description'),
+            ]);
+            DB::commit();
+        } catch (\Exception $exception) {
+            DB::rollback();
+            return redirect()->back()->withErrors(['msg' => $exception->getMessage()]);
+        }
+        return redirect()->back()->with(['success' => "Add Vaccine Success!"]);
+    }
+
+    public function editVaccine($id)
+    {
+        try{
+            $data = DataVaksin::findOrFail($id); 
+        } catch (\Exception $exception) {
+            return redirect()->back()->withErrors(['msg' => $exception->getMessage()]);
+        }
+        return view('superadmin.vaccine-add-edit')->with([
+            'title' => "Edit Vaccine",
+            'url' => "/superadmin/vaccine/editAction/".$id,
+            'data' => $data 
+        ]);
+    }
+    public function editVaccineAction(Request $request, $id){
+        try {
+            $request->validate([
+                'code' => 'required',
+                'name' => 'required',
+            ]);
+
+            DB::beginTransaction();
+            
+            $data = DataVaksin::findOrFail($id);
+
+            $data->update([
+                'code' => strtoupper($request->input('code')),
+                'name' => $request->input('name'),
+                'description' => $request->input('description'),
+            ]);
+            DB::commit();
+        } catch (\Exception $exception) {
+            DB::rollback();
+            return redirect()->back()->withErrors(['msg' => $exception->getMessage()]);
+        }
+        return redirect()->back()->with(['success' => "edit Vaccine Success!"]);
+    }
+    public function deleteVaccine($id){
+        try {
+            DB::beginTransaction();
+            $vaksinStoks = VaksinStok::where('data_vaksin_id', $id)->get();
+            foreach($vaksinStoks as $vaksinStok){
+                VaksinStok::findOrFail($vaksinStok->id)->delete();
+            }
+            $vaksinLogs = VaksinLog::where('data_vaksin_id', $id)->get();
+            foreach($vaksinLogs as $vaksinLog){
+                VaksinLog::findOrFail($vaksinLog->id)->delete();
+            }
+            DataVaksin::findOrFail($id)->delete();
+            DB::commit();
+        } catch (\Exception $exception) {
+            DB::rollback();
+            return redirect()->back()->withErrors(['msg' => $exception->getMessage()]);
+        }
+        return redirect()->back()->with(['success' => "delete Vaccine Success!"]);
     }
 
     
@@ -80,7 +171,7 @@ class SuperAdminController extends Controller
             DB::rollback();
             return redirect()->back()->withErrors(['msg' => $exception->getMessage()]);
         }
-        return redirect()->back()->with(['success' => "Add Administrator Sucess!"]);
+        return redirect()->back()->with(['success' => "Add Administrator Success!"]);
     }
     public function editAdministrator($id)
     {
@@ -111,7 +202,7 @@ class SuperAdminController extends Controller
             
             $data = User::findOrFail($id);
             $pass = $data->password;
-            if($request->has('password')){
+            if($request->has('password') && !empty($request->input('password'))){
                 $pass = Hash::make($request->input('password'));
             }
             
@@ -131,7 +222,7 @@ class SuperAdminController extends Controller
             DB::rollback();
             return redirect()->back()->withErrors(['msg' => $exception->getMessage()]);
         }
-        return redirect()->back()->with(['success' => "Edit Administrator Sucess!"]);
+        return redirect()->back()->with(['success' => "Edit Administrator Success!"]);
     }
 
     public function deleteAdministratorAction($id){
@@ -144,7 +235,7 @@ class SuperAdminController extends Controller
             DB::rollback();
             return redirect()->back()->withErrors(['msg' => $exception->getMessage()]);
         }
-        return redirect()->back()->with(['success' => "Add Administrator Sucess!"]);
+        return redirect()->back()->with(['success' => "Add Administrator Success!"]);
     }
 
     
@@ -200,7 +291,7 @@ class SuperAdminController extends Controller
             DB::rollback();
             return redirect()->back()->withErrors(['msg' => $exception->getMessage()]);
         }
-        return redirect()->back()->with(['success' => "Add Location Sucess!"]);
+        return redirect()->back()->with(['success' => "Add Location Success!"]);
     }
 
     public function editLocation($id)
@@ -238,13 +329,12 @@ class SuperAdminController extends Controller
             DB::rollback();
             return redirect()->back()->withErrors(['msg' => $exception->getMessage()]);
         }
-        return redirect()->back()->with(['success' => "edit Location Sucess!"]);
+        return redirect()->back()->with(['success' => "edit Location Success!"]);
     }
     public function deleteLocation($id){
         try {
             DB::beginTransaction();
-            
-            $location = VaksinLocation::findOrFail($id);
+
             $admins = UserAdmin::where('vaksin_location_id', $id)->get();
             foreach($admins as $admin){
                 UserAdmin::findOrFail($admin->user_id)->delete();
@@ -254,16 +344,16 @@ class SuperAdminController extends Controller
             foreach($vaksinStoks as $vaksinStok){
                 VaksinStok::findOrFail($vaksinStok->id)->delete();
             }
-            $vaksinStoks = VaksinLog::where('vaksin_location_id', $id)->get();
-            foreach($vaksinStoks as $vaksinStok){
-                VaksinLog::findOrFail($vaksinStok->id)->delete();
+            $vaksinLogs = VaksinLog::where('vaksin_location_id', $id)->get();
+            foreach($vaksinLogs as $vaksinLog){
+                VaksinLog::findOrFail($vaksinLog->id)->delete();
             }
-            $location->delete();
+            VaksinLocation::findOrFail($id)->delete();
             DB::commit();
         } catch (\Exception $exception) {
             DB::rollback();
             return redirect()->back()->withErrors(['msg' => $exception->getMessage()]);
         }
-        return redirect()->back()->with(['success' => "delete Location Sucess!"]);
+        return redirect()->back()->with(['success' => "delete Location Success!"]);
     }
 }
