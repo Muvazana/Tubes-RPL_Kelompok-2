@@ -41,7 +41,7 @@
                                         <tr class="bg-white border-collapse">
                                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $user->user_members->child_name }}</td>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $user->user_members->child_birth_date }}</td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $user->user_members->child_gender }}</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $user->user_members->child_gender == 'laki_laki' ? 'Laki-Laki':'Perempuan' }}</td>
                                             @foreach($user->user_members->parents_information as $parent)
                                                 @if($parent->parent_type == "father")
                                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $parent->name }}</td>

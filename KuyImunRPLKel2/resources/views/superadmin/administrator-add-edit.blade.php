@@ -63,9 +63,10 @@
                                     <div class="sm:col-span-5">
                                         <label for="vaksin_location_id" class="block text-sm font-medium text-gray-700"> Location
                                         </label>
-                                        <select name="location" class="block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                            <option>Location 1</option>
-                                            <option>Location 2</option>
+                                        <select name="vaksin_location_id" class="block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                            @foreach ($locations as $item)
+                                                <option {{(isset($data) && $data->user_admins->vaksin_location_id == $item->id) ? 'selected' : ''}} value="{{ $item->id }}">{{ $item->address }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>

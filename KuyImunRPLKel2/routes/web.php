@@ -25,18 +25,17 @@ Route::group(['middleware' => ['auth.basic', 'role:super_admin']], function () {
     Route::get('/superadmin/vaccine', "SuperAdminController@vaccine");
     Route::get('/superadmin/administrator', "SuperAdminController@administrator");
     Route::get('/superadmin/administrator/add', "SuperAdminController@addAdministrator");
+    Route::post('/superadmin/administrator/addAction', "SuperAdminController@addAdministratorAction");
     Route::get('/superadmin/administrator/edit/{id}', "SuperAdminController@editAdministrator");
+    Route::post('/superadmin/administrator/editAction/{id}', "SuperAdminController@editAdministratorAction");
     Route::get('/superadmin/administrator/delete/{id}', "SuperAdminController@deleteAdministratorAction");
     Route::get('/superadmin/patient', "SuperAdminController@patient");
-    Route::get('/superadmin/location', function () {
-        return view('superadmin.location');
-    });
-    Route::get('/superadmin/location/add', function () {
-        return view('superadmin.location-add-edit');
-    });
-    
-    Route::post('/superadmin/addVaksinLocationAction', "SuperAdminController@addVaksinLocationAction");
-    Route::post('/superadmin/registerAdminAction', "SuperAdminController@registerAdminAction");
+    Route::get('/superadmin/location', "SuperAdminController@location");
+    Route::get('/superadmin/location/add', "SuperAdminController@addLocation");
+    Route::post('/superadmin/location/addAction', "SuperAdminController@addLocationAction");
+    Route::get('/superadmin/location/edit/{id}', "SuperAdminController@editLocation");
+    Route::post('/superadmin/location/editAction/{id}', "SuperAdminController@editLocationAction");
+    Route::get('/superadmin/location/delete/{id}', "SuperAdminController@deleteLocation");
 });
 
 
