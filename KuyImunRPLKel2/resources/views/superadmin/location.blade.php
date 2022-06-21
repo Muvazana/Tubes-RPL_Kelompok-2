@@ -34,17 +34,24 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="bg-white border-collapse">
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Rumah Sakit 1</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">5</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">1.12521</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">2.32145</td>
-                                        
-                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-3 w-10">
-                                            <a href="" class="px-5 py-2 bg-blue-500 rounded-md text-white" >Edit</a>
-                                            <button class="px-5 py-2 bg-red-500 rounded-md text-white" data-id="">Delete</button>
-                                        </td>
-                                    </tr>
+                                    @if(count($data) == 0)
+                                        <tr class="bg-white border-collapse">
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900" colspan= "5"><center>No Data</center></td>
+                                        </tr>
+                                    @endif
+                                    @foreach ($data as $item)
+                                        <tr class="bg-white border-collapse">
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $item->address }}</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $item->admin_count }}</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $item->latitude }}</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $item->longitude }}</td>
+                                            
+                                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-3 w-10">
+                                                <a href="{{ url('/superadmin/location/edit/'.$item->id) }}" class="px-5 py-2 bg-blue-500 rounded-md text-white">Edit</a>
+                                                <a href="{{ url('/superadmin/location/delete/'.$item->id) }}" class="px-5 py-2 bg-red-500 rounded-md text-white">Delete</a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                             <!-- end of table -->
