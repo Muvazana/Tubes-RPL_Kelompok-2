@@ -14,7 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('parents_information', function (Blueprint $table) {
-            $table->integer('user_id')->unsigned()->primary();
+            $table->increments('id');
+            $table->integer('user_id')->unsigned();
             $table->string('nik', 100)->unique();
             $table->string('name', 255);
             $table->enum('parent_type', ['father', 'mother',])->default('father')->nullable();

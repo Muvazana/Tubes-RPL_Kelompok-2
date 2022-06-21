@@ -33,16 +33,35 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @for ($i = 1; $i < 3; $i++) <tr class="bg-white border-collapse">
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">marcspector1</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Steven Grant</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Super Admin</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-3 w-10">
-                                            <a href="" class="px-5 py-2 bg-blue-500 rounded-md text-white">Edit</a>
-                                            <button class="px-5 py-2 bg-red-500 rounded-md text-white" data-id="">Delete</button>
-                                        </td>
+                                    @if(count($data) == 0)
+                                        <tr class="bg-white border-collapse">
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900" colspan= "4"><center>No Data</center></td>
                                         </tr>
-                                        @endfor
+                                    @endif
+                                    @foreach ($data as $user)
+                                        <tr class="bg-white border-collapse">
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $user->username }}</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                                {{ $user->role == "admin" ? $user->user_admins->name : $user->user_super_admins->name }}
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                                {{ $user->role == "admin" ? "Admin" : "Super Admin" }}
+                                            </td>
+                                            @if($user->role == "admin")
+                                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-3 w-10">
+                                                    <a href="{{ url('/superadmin/administrator/edit/'.$user->id) }}" class="px-5 py-2 bg-blue-500 rounded-md text-white" {{$user->role != "admin" ? "disable" : ""}}>Edit</a>
+                                                    <a href="{{ url('/superadmin/administrator/delete/'.$user->id) }}" class="px-5 py-2 bg-red-500 rounded-md text-white" {{$user->role != "admin" ? "disable" : ""}}>Delete</a>
+                                                </td>
+                                            @else
+                                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-3 w-10"></td>
+                                            @endif
+                                            
+                                            {{-- <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-3 w-10">
+                                                <a href="" class="px-5 py-2 bg-blue-500 rounded-md text-white" {{$user->role != "admin" ? "disable" : ""}}>Edit</a>
+                                                <button class="px-5 py-2 bg-red-500 rounded-md text-white" data-id="" {{$user->role != "admin" ? "disable" : ""}}>Delete</button>
+                                            </td> --}}
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                             <!-- end of table -->

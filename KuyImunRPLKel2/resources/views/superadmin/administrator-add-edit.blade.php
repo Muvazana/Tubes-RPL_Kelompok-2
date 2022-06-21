@@ -14,26 +14,36 @@
             <main>
                 <div class="py-6">
                     <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-                        <h1 class="text-2xl font-semibold text-gray-900">Add Administrator</h1>
+                        <h1 class="text-2xl font-semibold text-gray-900">{{$title}}</h1>
                     </div>
                     <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
                         <!-- Replace with your content -->
                         <div class="py-4">
-                            <form id="form-data" method="post" enctype="multipart/form-data">
+                            @if (\Session::has('success'))
+                            <div class="alert alert-success" role="alert">
+                                {{ \Session::get('success') }}
+                            </div>
+                            @endif
+                            @if ($errors->any())
+                            <div class="alert alert-danger" role="alert">
+                                {{ $errors->first() }}
+                            </div>
+                            @endif
+                            <form action="{{ url($url) }}" id="form-data" method="post" enctype="multipart/form-data">
                                 <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
                                     @csrf
                                     <div class="sm:col-span-5">
-                                        <label for="full_name" class="block text-sm font-medium text-gray-700"> Full Name
+                                        <label for="name" class="block text-sm font-medium text-gray-700"> Full Name
                                         </label>
                                         <div class="mt-1 flex rounded-md shadow-sm">
-                                            <input type="text" name="full_name" id="full_name" autocomplete="full_name" class="flex-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full min-w-0 rounded sm:text-sm border-gray-300">
+                                            <input type="text" value="{{isset($data) ? $data->user_admins->name : ''}}" name="name" id="name" autocomplete="name" class="flex-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full min-w-0 rounded sm:text-sm border-gray-300">
                                         </div>
                                     </div>
                                     <div class="sm:col-span-5">
                                         <label for="username" class="block text-sm font-medium text-gray-700"> Username
                                         </label>
                                         <div class="mt-1 flex rounded-md shadow-sm">
-                                            <input type="text" name="username" id="username" autocomplete="username" class="flex-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full min-w-0 rounded sm:text-sm border-gray-300">
+                                            <input type="text" value="{{isset($data) ? $data->username : ''}}" name="username" id="username" autocomplete="username" class="flex-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full min-w-0 rounded sm:text-sm border-gray-300">
                                         </div>
                                     </div>
                                     <div class="sm:col-span-5">
@@ -47,7 +57,14 @@
                                         <label for="email" class="block text-sm font-medium text-gray-700"> Email
                                         </label>
                                         <div class="mt-1 flex rounded-md shadow-sm">
-                                            <input type="email" name="email" id="email" autocomplete="email" class="flex-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full min-w-0 rounded sm:text-sm border-gray-300">
+                                            <input type="email" value="{{isset($data) ? $data->email : ''}}" name="email" id="email" autocomplete="email" class="flex-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full min-w-0 rounded sm:text-sm border-gray-300">
+                                        </div>
+                                    </div>
+                                    <div class="sm:col-span-5">
+                                        <label for="vaksin_location_id" class="block text-sm font-medium text-gray-700"> vaksin_location_id
+                                        </label>
+                                        <div class="mt-1 flex rounded-md shadow-sm">
+                                            <input type="text" value="{{isset($data) ? $data->user_admins->vaksin_location_id : ''}}" name="vaksin_location_id" id="vaksin_location_id" autocomplete="vaksin_location_id" class="flex-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full min-w-0 rounded sm:text-sm border-gray-300">
                                         </div>
                                     </div>
                                 </div>

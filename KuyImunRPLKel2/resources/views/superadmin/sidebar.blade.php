@@ -63,7 +63,7 @@
                         <p class="text-sm font-medium text-gray-700 group-hover:text-gray-900">
                             <!-- Session::get('user')->name -->
                         </p>
-                        <a href="/logout" class="text-xs font-medium text-gray-500 group-hover:text-gray-700">Logout</a>
+                        <a href="/logoutAction" class="text-xs font-medium text-gray-500 group-hover:text-gray-700">Logout</a>
                     </div>
                 </div>
             </div>

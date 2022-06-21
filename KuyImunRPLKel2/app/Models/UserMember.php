@@ -41,7 +41,7 @@ class UserMember extends Model
 
     public function parents_information()
     {
-        return $this->hasOne(ParentsInformation::class, 'user_id', 'user_id');
+        return $this->hasMany(ParentsInformation::class, 'user_id', 'user_id');
     }
     
     public function vaksin_logs()

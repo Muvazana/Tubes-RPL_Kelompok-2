@@ -28,22 +28,36 @@
                                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-800 uppercase tracking-wider">Gender</th>
                                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-800 uppercase tracking-wider">Father</th>
                                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-800 uppercase tracking-wider">Mother</th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-800 uppercase tracking-wider">Action</th>
+                                        {{-- <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-800 uppercase tracking-wider">Action</th> --}}
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @for ($i = 1; $i < 3; $i++) <tr class="bg-white border-collapse">
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Steven Grant</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">12-12-2222</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Male</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Khonsu</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Hippo</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-3 w-10">
-                                            <a href="" class="px-5 py-2 bg-blue-500 rounded-md text-white">Edit</a>
-                                            <button class="px-5 py-2 bg-red-500 rounded-md text-white" data-id="">Delete</button>
-                                        </td>
+                                    @if(count($data) == 0)
+                                        <tr class="bg-white border-collapse">
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900" colspan= "5"><center>No Data</center></td>
                                         </tr>
-                                        @endfor
+                                    @endif
+                                    @foreach ($data as $user) 
+                                        <tr class="bg-white border-collapse">
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $user->user_members->child_name }}</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $user->user_members->child_birth_date }}</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $user->user_members->child_gender }}</td>
+                                            @foreach($user->user_members->parents_information as $parent)
+                                                @if($parent->parent_type == "father")
+                                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $parent->name }}</td>
+                                                @endif
+                                            @endforeach
+                                            @foreach($user->user_members->parents_information as $parent)
+                                                @if($parent->parent_type == "mother")
+                                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $parent->name }}</td>
+                                                @endif
+                                            @endforeach
+                                            {{-- <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-3 w-10">
+                                                <a href="" class="px-5 py-2 bg-blue-500 rounded-md text-white">Edit</a>
+                                                <button class="px-5 py-2 bg-red-500 rounded-md text-white" data-id="">Delete</button>
+                                            </td> --}}
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                             <!-- end of table -->

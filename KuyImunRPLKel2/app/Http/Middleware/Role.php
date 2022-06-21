@@ -4,15 +4,14 @@ namespace App\Http\Middleware;
 
 use Closure;
 use App\Http\Library\ApiHelpers;
-use Illuminate\Contracts\Auth\Factory as Auth;
+// use Illuminate\Contracts\Auth\Factory as Auth;
+use Illuminate\Support\Facades\Auth;
 
 class Role
 {
-    use ApiHelpers;
-
     public function handle($request, Closure $next, ... $roles)
     {
-        $user = auth('sanctum')->user();
+        $user = Auth::user();
 
         // if(auth('sanctum')->user()->isAdmin())
         //     return $next($request);
@@ -22,6 +21,7 @@ class Role
                 return $next($request);
         }
         
-        return route('login');
+        // return redirect()->route('login');
+        return response('Unauthorized.', 401);
     }
 }
