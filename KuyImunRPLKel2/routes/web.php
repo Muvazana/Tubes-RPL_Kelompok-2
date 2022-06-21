@@ -23,6 +23,11 @@ Route::post('/registerMemberAction', "AuthController@registerMemberAction");
 Route::group(['middleware' => ['auth.basic', 'role:super_admin']], function () {
     Route::get('/superadmin', "SuperAdminController@index")->name("superAdminDashboard");
     Route::get('/superadmin/vaccine', "SuperAdminController@vaccine");
+    Route::get('/superadmin/vaccine/add', "SuperAdminController@addVaccine");
+    Route::post('/superadmin/vaccine/addAction', "SuperAdminController@addVaccineAction");
+    Route::get('/superadmin/vaccine/edit/{id}', "SuperAdminController@editVaccine");
+    Route::post('/superadmin/vaccine/editAction/{id}', "SuperAdminController@editVaccineAction");
+    Route::get('/superadmin/vaccine/delete/{id}', "SuperAdminController@deleteVaccine");
     Route::get('/superadmin/administrator', "SuperAdminController@administrator");
     Route::get('/superadmin/administrator/add', "SuperAdminController@addAdministrator");
     Route::post('/superadmin/administrator/addAction', "SuperAdminController@addAdministratorAction");
@@ -41,29 +46,16 @@ Route::get('/superadmin/vaccine/add', function () {
     return view('superadmin.vaccine-add');
 });
 
-Route::get('/admin', function () {
-    return view('admin.index');
-});
-Route::get('/admin/schedule', function () {
-    return view('admin.schedule');
-});
-Route::get('/admin/schedule/edit', function () {
-    return view('admin.schedule-edit');
-});
-Route::get('/admin/vaccine', function () {
-    return view('admin.vaccine');
-});
-Route::get('/admin/vaccine/add', function () {
-    return view('admin.vaccine-add');
-});
-Route::get('/admin/patient', function () {
-    return view('admin.patient');
-});
-Route::get('/admin/patient/edit', function () {
-    return view('admin.patient-edit');
-});
-Route::get('/admin/log', function () {
-    return view('admin.log');
+
+Route::group(['middleware' => ['auth.basic', 'role:admin']], function () {
+    Route::get('/admin', "AdminController@index")->name("adminDashboard");
+    Route::get('/admin/schedule', "AdminController@schedule");
+    Route::get('/admin/schedule/edit/{id}', "AdminController@editSchedule");
+    Route::get('/admin/vaccine', "AdminController@vaccine");
+    Route::get('/admin/vaccine/add', "AdminController@addVaccine");
+    Route::get('/admin/patient', "AdminController@patient");
+    Route::get('/admin/patient/edit/{id}', "AdminController@editPatient");
+    Route::get('/admin/log', "AdminController@log");
 });
 
 
