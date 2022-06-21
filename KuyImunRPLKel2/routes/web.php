@@ -37,7 +37,9 @@ Route::group(['middleware' => ['auth.basic', 'role:super_admin']], function () {
     Route::post('/superadmin/location/editAction/{id}', "SuperAdminController@editLocationAction");
     Route::get('/superadmin/location/delete/{id}', "SuperAdminController@deleteLocation");
 });
-
+Route::get('/superadmin/vaccine/add', function () {
+    return view('superadmin.vaccine-add');
+});
 
 Route::get('/admin', function () {
     return view('admin.index');

@@ -17,6 +17,9 @@
                         <h1 class="text-2xl font-semibold text-gray-900">Vaccine</h1>
                     </div>
                     <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+                        <div class="flex justify-end pt-3">
+                            <a href="/superadmin/vaccine/add" class="rounded text-white bg-blue-600 px-4 py-2 m-4 mr-0">Add new Vaccine</a>
+                        </div>
                         <!-- Replace with your content -->
                         <div class="py-4">
                             <!-- table -->
@@ -25,27 +28,25 @@
                                     <tr>
                                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-800 uppercase tracking-wider">Code</th>
                                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-800 uppercase tracking-wider">Name</th>
-                                        {{-- @if(!(auth()->user()->role == "super_admin"))
-                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-800 uppercase tracking-wider">Action</th>
-                                        @endif --}}
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-800 uppercase tracking-wider">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @if(count($data) == 0)
-                                        <tr class="bg-white border-collapse">
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900" colspan= "2"><center>No Data</center></td>
-                                        </tr>
+                                    <tr class="bg-white border-collapse">
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900" colspan="3">
+                                            <center>No Data</center>
+                                        </td>
+                                    </tr>
                                     @endif
                                     @foreach ($data as $item)
                                     <tr class="bg-white border-collapse">
                                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $item->code }}</td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Vaccine {{ $item->name }}</td>
-                                        {{-- @if(!(auth()->user()->role == "super_admin"))
-                                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-3 w-10">
-                                                <a href="" class="px-5 py-2 bg-blue-500 rounded-md text-white">Edit</a>
-                                                <button class="px-5 py-2 bg-red-500 rounded-md text-white" data-id="">Delete</button>
-                                            </td>
-                                        @endif --}}
+                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-3 w-10">
+                                            <a href="" class="px-5 py-2 bg-blue-500 rounded-md text-white">Edit</a>
+                                            <button class="px-5 py-2 bg-red-500 rounded-md text-white" data-id="">Delete</button>
+                                        </td>
                                     </tr>
                                     @endforeach
                                 </tbody>

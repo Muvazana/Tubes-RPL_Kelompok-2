@@ -8,9 +8,9 @@
 <body class="h-full">
     <div>
         <!-- Static sidebar for desktop -->
-        @include('admin.sidebar')
+        @include('superadmin.sidebar')
         <div class="md:pl-64 flex flex-col flex-1">
-            @include('admin.header')
+            @include('superadmin.header')
             <main>
                 <div class="py-6">
                     <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
@@ -22,20 +22,24 @@
                             <form id="form-data" method="post" enctype="multipart/form-data">
                                 <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
                                     @csrf
-                                    <div class="sm:col-span-5">
-                                        <label for="vaccine" class="block text-sm font-medium text-gray-700"> Vaccine
-                                        </label>
-                                        <select name="vaccine" class="block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                            <option>Vaccine 1</option>
-                                            <option>Vaccine 2</option>
-                                            <option>Vaccine 3</option>
-                                        </select>
-                                    </div>
-                                    <div class="sm:col-span-5">
-                                        <label for="stock" class="block text-sm font-medium text-gray-700"> Stock
+                                    <div class="sm:col-span-3">
+                                        <label for="cpt_code" class="block text-sm font-medium text-gray-700"> CPT Code
                                         </label>
                                         <div class="mt-1 flex rounded-md shadow-sm">
-                                            <input type="text" name="stock" id="stock" autocomplete="stock" class="flex-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full min-w-0 rounded sm:text-sm border-gray-300">
+                                            <input type="text" name="cpt_code" id="cpt_code" autocomplete="cpt_code" class="flex-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full min-w-0 rounded sm:text-sm border-gray-300">
+                                        </div>
+                                    </div>
+                                    <div class="sm:col-span-5">
+                                        <label for="name" class="block text-sm font-medium text-gray-700"> Vaccine Name
+                                        </label>
+                                        <div class="mt-1 flex rounded-md shadow-sm">
+                                            <input type="text" name="name" id="name" autocomplete="name" class="flex-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full min-w-0 rounded sm:text-sm border-gray-300">
+                                        </div>
+                                    </div>
+                                    <div class="sm:col-span-5">
+                                        <label for="about" class="block text-sm font-medium text-gray-700"> Deskripsi</label>
+                                        <div class="mt-1">
+                                            <textarea id="beach_description" name="beach_description" rows="3" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md"></textarea>
                                         </div>
                                     </div>
                                 </div>
