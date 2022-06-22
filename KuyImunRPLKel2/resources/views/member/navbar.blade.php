@@ -6,10 +6,10 @@
             </a>
         </div>
         <ul class="flex items-center justify-center font-semibold space-x-4">
-            <li class="hover:text-gray-400">Home</li>
-            <li class="hover:text-gray-400">About</li>
-            <li class="hover:text-gray-400">Schedule</li>
-            <li class="hover:text-gray-400">Log</li>
+            <li class="hover:text-gray-400"><a href="/member">Home</a></li>
+            {{-- <li class="hover:text-gray-400">About</li> --}}
+            <li class="hover:text-gray-400"><a href="/member/schedule">Schedule</a></li>
+            <li class="hover:text-gray-400"><a href="/logoutAction">Logout</a></li>
         </ul>
         <ul class="flex items-center justify-end font-semibold space-x-4">
             <button type="button" class="max-w-xs bg-white flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" id="user-menu-button" aria-expanded="false" aria-haspopup="true">

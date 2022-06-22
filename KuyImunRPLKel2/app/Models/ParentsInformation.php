@@ -9,7 +9,7 @@ class ParentsInformation extends Model
 {
     use HasFactory;
     protected $table = 'parents_information';
-    protected $primaryKey = 'user_id';
+    protected $primaryKey = 'id';
 
     /**
      * The attributes that are mass assignable.

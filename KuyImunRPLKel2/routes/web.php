@@ -18,6 +18,7 @@ Route::get('/', function () {
 Route::get('/login', "AuthController@login")->name("login");
 Route::post('/loginAction', "AuthController@loginAction");
 Route::get('/logoutAction', "AuthController@logoutAction");
+Route::get('/register', "AuthController@register");
 Route::post('/registerMemberAction', "AuthController@registerMemberAction");
 
 Route::group(['middleware' => ['auth.basic', 'role:super_admin']], function () {
@@ -42,9 +43,6 @@ Route::group(['middleware' => ['auth.basic', 'role:super_admin']], function () {
     Route::post('/superadmin/location/editAction/{id}', "SuperAdminController@editLocationAction");
     Route::get('/superadmin/location/delete/{id}', "SuperAdminController@deleteLocation");
 });
-Route::get('/superadmin/vaccine/add', function () {
-    return view('superadmin.vaccine-add');
-});
 
 
 Route::group(['middleware' => ['auth.basic', 'role:admin']], function () {
@@ -53,20 +51,20 @@ Route::group(['middleware' => ['auth.basic', 'role:admin']], function () {
     Route::get('/admin/schedule/edit/{id}', "AdminController@editSchedule");
     Route::get('/admin/vaccine', "AdminController@vaccine");
     Route::get('/admin/vaccine/add', "AdminController@addVaccine");
+    Route::post('/admin/vaccine/addAction', "AdminController@addVaccineAction");
+    Route::get('/admin/vaccine/edit/{id}', "AdminController@editVaccine");
+    Route::post('/admin/vaccine/editAction/{id}', "AdminController@editVaccineAction");
+    Route::get('/admin/vaccine/delete/{id}', "AdminController@deleteVaccine");
     Route::get('/admin/patient', "AdminController@patient");
     Route::get('/admin/patient/edit/{id}', "AdminController@editPatient");
+    Route::post('/admin/patient/editAction/{id}', "AdminController@editPatientAction");
+    Route::get('/admin/patient/delete/{id}', "AdminController@deletePatient");
     Route::get('/admin/log', "AdminController@log");
 });
 
-
-Route::get('/register', function () {
-    return view('register');
-});
-Route::get('/user/log', function () {
-    return view('user.log');
-});
-Route::get('/user/schedule', function () {
-    return view('user.schedule');
+Route::group(['middleware' => ['auth.basic', 'role:member']], function () {
+    Route::get('/member', "MemberController@index")->name("memberDashboard");
+    Route::get('/member/schedule', "MemberController@schedule");
 });
 
 Route::get('/notfound', function () {

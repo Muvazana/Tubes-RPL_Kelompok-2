@@ -15,7 +15,7 @@
                 <a href="/login">Login</a>
             </li>
             <li class="hover:text-gray-400">
-                <a href="/register">Login</a>
+                <a href="/register">Register</a>
             </li>
         </ul>
     </div>

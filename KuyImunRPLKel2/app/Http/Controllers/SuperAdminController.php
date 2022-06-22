@@ -165,7 +165,7 @@ class SuperAdminController extends Controller
                 'vaksin_location_id' => $request->input('vaksin_location_id'),
                 'name' => $request->input('name'),
             ]);
-            $data = $data->with('users')->get();
+            // $data = $data->with('users')->get();
             DB::commit();
         } catch (\Exception $exception) {
             DB::rollback();

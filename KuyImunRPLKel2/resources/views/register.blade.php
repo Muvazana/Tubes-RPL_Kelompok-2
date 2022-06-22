@@ -8,7 +8,17 @@
 <body class="w-full">
     @include('navbar')
     <main class="mx-64 py-24 ">
-        <form action="#" method="POST">
+        @if (\Session::has('success'))
+        <div class="alert alert-success" role="alert">
+            {{ \Session::get('success') }}
+        </div>
+        @endif
+        @if ($errors->any())
+        <div class="alert alert-danger" role="alert">
+            {{ $errors->first() }}
+        </div>
+        @endif   
+        <form action="{{ url('/registerMemberAction') }}" method="POST">
             <div class="mt-10 sm:mt-0">
                 <div class="md:grid md:grid-cols-3 md:gap-6">
                     <div class="md:col-span-1">
@@ -30,8 +40,8 @@
                                         <input type="text" name="password" id="password" autocomplete="password" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                     </div>
                                     <div class="col-span-6 sm:col-span-6">
-                                        <label for="email-address" class="block text-sm font-medium text-gray-700">Email address</label>
-                                        <input type="text" name="email-address" id="email-address" autocomplete="email" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                        <label for="email" class="block text-sm font-medium text-gray-700">Email address</label>
+                                        <input type="text" name="email" id="email" autocomplete="email" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                     </div>
                                 </div>
                             </div>
@@ -53,20 +63,20 @@
                             <div class="px-4 py-5 bg-white sm:p-6">
                                 <div class="grid grid-cols-6 gap-6">
                                     <div class="col-span-6 sm:col-span-3">
-                                        <label for="first-name" class="block text-sm font-medium text-gray-700">First name</label>
-                                        <input type="text" name="first-name" id="first-name" autocomplete="given-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                        <label for="first_name" class="block text-sm font-medium text-gray-700">First name</label>
+                                        <input type="text" name="first_name" id="first_name" autocomplete="given-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                     </div>
 
                                     <div class="col-span-6 sm:col-span-3">
-                                        <label for="last-name" class="block text-sm font-medium text-gray-700">Last name</label>
-                                        <input type="text" name="last-name" id="last-name" autocomplete="family-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                        <label for="last_name" class="block text-sm font-medium text-gray-700">Last name</label>
+                                        <input type="text" name="last_name" id="last_name" autocomplete="family-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                     </div>
 
                                     <div class="col-span-6 sm:col-span-2">
-                                        <label for="gender" class="block text-sm font-medium text-gray-700">Gender</label>
-                                        <select id="gender" name="gender" autocomplete="gender-name" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                                            <option>Male</option>
-                                            <option>Female</option>
+                                        <label for="child_gender" class="block text-sm font-medium text-gray-700">Gender</label>
+                                        <select id="child_gender" name="child_gender" autocomplete="child_gender" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                            <option value="laki_laki">Male</option>
+                                            <option value="perempuan">Female</option>
                                         </select>
                                     </div>
 
@@ -78,13 +88,13 @@
                                                     <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path>
                                                 </svg>
                                             </div>
-                                            <input datepicker type="text" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm pl-10 p-2.5" placeholder="Select date">
+                                            <input datepicker name="child_birth_date" type="text" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm pl-10 p-2.5" placeholder="Select date">
                                         </div>
                                     </div>
 
                                     <div class="col-span-6">
-                                        <label for="nik" class="block text-sm font-medium text-gray-700">NIK</label>
-                                        <input type="text" name="nik" id="nik" autocomplete="nik" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                        <label for="child_nik" class="block text-sm font-medium text-gray-700">NIK</label>
+                                        <input type="text" name="child_nik" id="child_nik" autocomplete="child_nik" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                     </div>
                                 </div>
                             </div>
@@ -164,13 +174,13 @@
                                     </div>
 
                                     <div class="col-span-6 sm:col-span-3 lg:col-span-2">
-                                        <label for="region" class="block text-sm font-medium text-gray-700">State / Province</label>
-                                        <input type="text" name="region" id="region" autocomplete="address-level1" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                        <label for="state" class="block text-sm font-medium text-gray-700">State / Province</label>
+                                        <input type="text" name="state" id="state" autocomplete="address-level1" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                     </div>
 
                                     <div class="col-span-6 sm:col-span-3 lg:col-span-2">
-                                        <label for="postal-code" class="block text-sm font-medium text-gray-700">ZIP / Postal code</label>
-                                        <input type="text" name="postal-code" id="postal-code" autocomplete="postal-code" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                        <label for="zip_code" class="block text-sm font-medium text-gray-700">ZIP / Postal code</label>
+                                        <input type="text" name="zip_code" id="zip_code" autocomplete="zip_code" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                     </div>
                                 </div>
                             </div>

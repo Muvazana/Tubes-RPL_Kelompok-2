@@ -10,6 +10,8 @@ use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\User;
+use App\Models\UserMember;
+use App\Models\ParentsInformation;
 
 class AuthController extends Controller
 {
@@ -39,6 +41,7 @@ class AuthController extends Controller
             if(Auth::loginUsingId($data->id)){
                 if(Auth::user()->role == "super_admin") return redirect()->route("superAdminDashboard");
                 else if(Auth::user()->role == "admin") return redirect()->route("adminDashboard");
+                else return redirect()->route("memberDashboard");
             }
         } catch (\Exception $exception) {
             return redirect()->back()->withErrors(['msg' => $exception->getMessage()]);
@@ -53,6 +56,10 @@ class AuthController extends Controller
         }
     }
 
+    public function register()
+    {
+        return view('register');
+    }
     public function registerMemberAction(Request $request){
         $role = "member";
         try {
@@ -60,6 +67,20 @@ class AuthController extends Controller
                 'username' => 'required',
                 'email' => 'required|email',
                 'password' => 'required',
+                'child_nik' => 'required',
+                'first_name' => 'required',
+                'last_name' => 'required',
+                'child_gender' => 'required',
+                'child_birth_date' => 'required',
+                'father_nik' => 'required',
+                'father_name' => 'required',
+                'mother_nik' => 'required',
+                'mother_name' => 'required',
+                'phone_number' => 'required',
+                'address' => 'required',
+                'city' => 'required',
+                'state' => 'required',
+                'zip_code' => 'required',
             ]);
 
             DB::beginTransaction();
@@ -69,19 +90,41 @@ class AuthController extends Controller
                 'password' => Hash::make($request->input('password')),
                 'role' => $role
             ]);
+            $child_name = strtolower($request->input('first_name')).' '.strtolower($request->input('last_name'));
+            UserMember::create([
+                'user_id' => $data->id,
+                'nik' => $request->input('child_nik'),
+                'child_name' => $child_name,
+                'child_gender' => $request->input('child_gender'),
+                'child_birth_date' => date('Y-m-d', strtotime($request->input('child_birth_date'))),
+                'phone_number' => $request->input('phone_number'),
+                'address' => strtolower($request->input('address')),
+                'optional_address' => strtolower($request->input('optional_address')),
+                'zip_code' => $request->input('zip_code'),
+                'city' => $request->input('city'),
+                'state' => $request->input('state'),
+                // 'latitude' => $request->input('email'), // TODO Change with real data
+                // 'longitude' => $request->input('email'), // TODO Change with real data
+                'document_path' => "Just Dmumy", // TODO Change with real data
+                'status' => 'not_verified',
+            ]);
+            ParentsInformation::create([
+                'user_id' => $data->id,
+                'nik' => $request->input('father_nik'),
+                'name' => $request->input('father_name'),
+                'parent_type' => 'father',
+            ]);
+            ParentsInformation::create([
+                'user_id' => $data->id,
+                'nik' => $request->input('mother_nik'),
+                'name' => $request->input('mother_name'),
+                'parent_type' => 'mother',
+            ]);
             DB::commit();
         } catch (\Exception $exception) {
             DB::rollback();
-
-            // TODO when register member Error
-            return response()->json([
-                'msg' => $exception->getMessage(),
-            ]);
+            return redirect()->back()->withErrors(['msg' => $exception->getMessage()]);
         }
-
-        // TODO when register member Success
-        return response()->json([
-            'msg' => "Sucess",
-        ]);
+        return redirect()->back()->with(['success' => "Create Account Success!"]);
     }
 }
