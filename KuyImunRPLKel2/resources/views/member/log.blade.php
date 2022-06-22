@@ -21,6 +21,7 @@
                             <tr>
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-800 uppercase tracking-wider">Date</th>
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-800 uppercase tracking-wider">Vaccine</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-800 uppercase tracking-wider">Location</th>
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-800 uppercase tracking-wider">Immunization</th>
                             </tr>
                         </thead>
@@ -28,6 +29,7 @@
                             @for ($i = 1; $i < 3; $i++) <tr class="bg-white border-collapse">
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">12-12-2222</td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Khonsu</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Rumah Sakit Silent Hill</td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">true</td>
                                 </tr>
                                 @endfor

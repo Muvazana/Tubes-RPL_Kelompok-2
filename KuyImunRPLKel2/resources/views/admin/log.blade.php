@@ -26,6 +26,7 @@
                                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-800 uppercase tracking-wider">Full Name</th>
                                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-800 uppercase tracking-wider">Date of Birth</th>
                                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-800 uppercase tracking-wider">Vaccine</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-800 uppercase tracking-wider">Location</th>
                                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-800 uppercase tracking-wider">Immunization</th>
                                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-800 uppercase tracking-wider">Action</th>
                                     </tr>
@@ -35,6 +36,7 @@
                                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Steven Grant</td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">12-12-2222</td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Khonsu</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Rumah Sakit Silent Hill</td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">true</td>
                                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-3 w-10">
                                             <a href="" class="px-5 py-2 bg-blue-500 rounded-md text-white">Edit</a>
