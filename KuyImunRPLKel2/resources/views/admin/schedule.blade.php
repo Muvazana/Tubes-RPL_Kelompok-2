@@ -34,21 +34,21 @@
                                     </thead>
                                     <tbody>
                                         @if(count($data) == 0)
-                                            <tr class="bg-white border-collapse">
-                                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900" colspan="3">
-                                                    <center>No Data</center>
-                                                </td>
-                                            </tr>
+                                        <tr class="bg-white border-collapse">
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900" colspan="3">
+                                                <center>No Data</center>
+                                            </td>
+                                        </tr>
                                         @endif
                                         @foreach ($data as $item)
-                                            <tr class="bg-white border-collapse">
-                                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $item->user_members->child_name }}</td>
-                                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $item->status }}</td>
-                                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-3 w-10">
-                                                    <a href="{{ url('/admin/schedule/edit/'.$item->id) }}" class="px-5 py-2 bg-blue-500 rounded-md text-white">Edit</a>
-                                                    <a href="{{ url('/admin/schedule/delete/'.$item->id) }}" class="px-5 py-2 bg-red-500 rounded-md text-white">Delete</a>
-                                                </td>
-                                            </tr>
+                                        <tr class="bg-white border-collapse">
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $item->user_members->child_name }}</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $item->status }}</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-3 w-10">
+                                                <a href="{{ url('/admin/schedule/edit/'.$item->id) }}" class="px-5 py-2 bg-blue-500 rounded-md text-white">Edit</a>
+                                                <a href="{{ url('/admin/schedule/delete/'.$item->id) }}" class="px-5 py-2 bg-red-500 rounded-md text-white">Delete</a>
+                                            </td>
+                                        </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -63,20 +63,6 @@
         </div>
     </div>
     @include('body')
-
-    
-    <script type="text/javascript">
-
-        $(function() {
-            $('#datetimepicker').datetimepicker({
-                inline: true,
-                sideBySide: true
-            });
-            $('#datetimepicker').on('dp.change', function(event) {
-                alert(event.date);
-            });
-        });
-    </script>
 </body>
 
 </html>

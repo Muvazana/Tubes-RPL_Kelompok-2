@@ -79,7 +79,8 @@ class AdminController extends Controller
             DB::rollback();
             return redirect()->back()->withErrors(['msg' => $exception->getMessage()]);
         }
-        return redirect()->back()->with(['success' => "edit Schedule Success!"]);
+        // return redirect()->back()->with(['success' => "edit Schedule Success!"]);
+        return redirect()->route('adminSchedule');
     }
     public function deleteSchedule(Request $request, $id){
         try {

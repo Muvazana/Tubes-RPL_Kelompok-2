@@ -9,7 +9,7 @@
         "prod": "npm run production",
         "production": "mix --production"
     },
-    "devDependencies": {
+    "devDependencies": {        
         "@tailwindcss/forms": "^0.5.2",
         "autoprefixer": "^10.4.4",
         "axios": "^0.25",
@@ -19,6 +19,8 @@
         "tailwindcss": "^3.0.23"
     },
     "dependencies": {
-        "flowbite": "^1.4.7"
+        "type": "module",
+        "flowbite": "^1.4.7",
+        "flowbite-datepicker": "^1.2.1"
     }
 }

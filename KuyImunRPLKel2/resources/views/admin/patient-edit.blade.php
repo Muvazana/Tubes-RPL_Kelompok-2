@@ -22,15 +22,57 @@
                         <!-- Replace with your content -->
                         <div class="py-4">
                             @if (\Session::has('success'))
-                            <div class="alert alert-success" role="alert">
-                                {{ \Session::get('success') }}
+                            <div class="rounded-md bg-green-50 p-4 mb-5">
+                                <div class="flex alert-del">
+                                    <div class="flex-shrink-0">
+                                        <!-- Heroicon name: solid/check-circle -->
+                                        <svg class="h-5 w-5 text-green-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                        </svg>
+                                    </div>
+                                    <div class="ml-3">
+                                        <p class="text-sm font-medium text-green-800">{{ \Session::get('success') }}</p>
+                                    </div>
+                                    <div class="ml-auto pl-3">
+                                        <div class="-mx-1.5 -my-1.5">
+                                            <button type="button" class="inline-flex bg-green-50 rounded-md p-1.5 text-green-500 hover:bg-green-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-green-50 focus:ring-green-600">
+                                                <span class="sr-only">Dismiss</span>
+                                                <!-- Heroicon name: solid/x -->
+                                                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                                    <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             @endif
                             @if ($errors->any())
-                            <div class="alert alert-danger" role="alert">
-                                {{ $errors->first() }}
+                            <div class="rounded-md bg-red-50 p-4 mb-5">
+                                <div class="flex alert-del">
+                                    <div class="flex-shrink-0">
+                                        <!-- Heroicon name: solid/check-circle -->
+                                        <svg class="h-5 w-5 text-red-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+                                        </svg>
+                                    </div>
+                                    <div class="ml-3">
+                                        <p class="text-sm font-medium text-red-800">{{ $errors->first() }}</p>
+                                    </div>
+                                    <div class="ml-auto pl-3">
+                                        <div class="-mx-1.5 -my-1.5">
+                                            <button type="button" class="inline-flex bg-red-50 rounded-md p-1.5 text-red-500 hover:bg-red-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-red-50 focus:ring-red-600">
+                                                <span class="sr-only">Dismiss</span>
+                                                <!-- Heroicon name: solid/x -->
+                                                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                                    <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            @endif 
+                            @endif
                             <form action="{{ (isset($data) && $data->user_members->status == "verified") ? '' : url('/admin/patient/editAction/'.$data->id)  }}" id="form-data" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="bg-white shadow overflow-hidden sm:rounded-lg">
@@ -69,28 +111,28 @@
                                     <div class="border-t border-gray-200 px-4 py-5 sm:px-6">
                                         <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
                                             @foreach($data->user_members->parents_information as $parent)
-                                                @if($parent->parent_type == "father")
-                                                    <div class="sm:col-span-1">
-                                                        <dt class="text-sm font-medium text-gray-500">Father</dt>
-                                                        <dd class="mt-1 text-sm text-gray-900">{{ $parent->name }}</dd>
-                                                    </div>
-                                                    <div class="sm:col-span-1">
-                                                        <dt class="text-sm font-medium text-gray-500">NIK</dt>
-                                                        <dd class="mt-1 text-sm text-gray-900">{{ $parent->nik }}</dd>
-                                                    </div>
-                                                @endif
+                                            @if($parent->parent_type == "father")
+                                            <div class="sm:col-span-1">
+                                                <dt class="text-sm font-medium text-gray-500">Father</dt>
+                                                <dd class="mt-1 text-sm text-gray-900">{{ $parent->name }}</dd>
+                                            </div>
+                                            <div class="sm:col-span-1">
+                                                <dt class="text-sm font-medium text-gray-500">NIK</dt>
+                                                <dd class="mt-1 text-sm text-gray-900">{{ $parent->nik }}</dd>
+                                            </div>
+                                            @endif
                                             @endforeach
                                             @foreach($data->user_members->parents_information as $parent)
-                                                @if($parent->parent_type == "mother")
-                                                    <div class="sm:col-span-1">
-                                                        <dt class="text-sm font-medium text-gray-500">Mother</dt>
-                                                        <dd class="mt-1 text-sm text-gray-900">{{ $parent->name }}</dd>
-                                                    </div>
-                                                    <div class="sm:col-span-1">
-                                                        <dt class="text-sm font-medium text-gray-500">NIK</dt>
-                                                        <dd class="mt-1 text-sm text-gray-900">{{ $parent->nik }}</dd>
-                                                    </div>
-                                                @endif
+                                            @if($parent->parent_type == "mother")
+                                            <div class="sm:col-span-1">
+                                                <dt class="text-sm font-medium text-gray-500">Mother</dt>
+                                                <dd class="mt-1 text-sm text-gray-900">{{ $parent->name }}</dd>
+                                            </div>
+                                            <div class="sm:col-span-1">
+                                                <dt class="text-sm font-medium text-gray-500">NIK</dt>
+                                                <dd class="mt-1 text-sm text-gray-900">{{ $parent->nik }}</dd>
+                                            </div>
+                                            @endif
                                             @endforeach
                                             <div class="sm:col-span-2">
                                                 <dt class="text-sm font-medium text-gray-500">Phone Number</dt>
@@ -165,97 +207,14 @@
                                     </div>
                                 </div>
                                 @if((isset($data) && $data->user_members->status != "verified"))
-                                    <div class="pt-5">
-                                        <div class="flex justify-end">
-                                            <button type="submit" class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">Done</button>
-                                        </div>
-                                    </div>
-                                @endif
-                            </form>
-                            <!-- <form id="form-data" method="post" enctype="multipart/form-data">
-                                <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
-                                    @csrf
-                                    <div class="sm:col-span-5">
-                                        <p class="block text-2xl font-medium text-gray-700"> Josep Herman </p>
-                                    </div>
-                                    <div class="sm:col-span-5">
-                                        <label for="date" class="block text-sm font-medium text-gray-700"> Date of Birth </label>
-                                        <p class="block text-lg font-medium text-gray-700"> 17-12-3005 </p>
-                                    </div>
-                                    <div class="sm:col-span-5">
-                                        <label for="gender" class="block text-sm font-medium text-gray-700"> Gender </label>
-                                        <p class="block text-lg font-medium text-gray-700"> Male </p>
-                                    </div>
-                                    <div class="sm:col-span-5">
-                                        <label for="nik" class="block text-sm font-medium text-gray-700"> NIK </label>
-                                        <p class="block text-lg font-medium text-gray-700"> 13131314015 </p>
-                                    </div>
-                                    <br>
-                                    <div class="sm:col-span-5">
-                                        <label class="block text-2xl font-medium text-gray-700"> Parents </label>
-                                    </div>
-                                    <div class="sm:col-span-5">
-                                        <label for="father" class="block text-sm font-medium text-gray-700"> Father </label>
-                                        <p class="block text-lg font-medium text-gray-700"> Mahdisk </p>
-                                    </div>
-                                    <div class="sm:col-span-5">
-                                        <label for="nik_father" class="block text-sm font-medium text-gray-700"> NIK </label>
-                                        <p class="block text-lg font-medium text-gray-700"> 13131314015 </p>
-                                    </div>
-                                    <div class="sm:col-span-5">
-                                        <label for="mother" class="block text-sm font-medium text-gray-700"> Mother </label>
-                                        <p class="block text-lg font-medium text-gray-700"> Mahdisk </p>
-                                    </div>
-                                    <div class="sm:col-span-5">
-                                        <label for="nik_mother" class="block text-sm font-medium text-gray-700"> NIK </label>
-                                        <p class="block text-lg font-medium text-gray-700"> 13131314015 </p>
-                                    </div>
-                                    <br>
-                                    <div class="sm:col-span-5">
-                                        <label class="block text-2xl font-medium text-gray-700"> Address </label>
-                                    </div>
-                                    <div class="sm:col-span-5">
-                                        <label for="address" class="block text-sm font-medium text-gray-700"> Address </label>
-                                        <p class="block text-lg font-medium text-gray-700"> Jl. bipbupbap no. 304 </p>
-                                    </div>
-                                    <div class="sm:col-span-5">
-                                        <label for="optional_address" class="block text-sm font-medium text-gray-700"> Optional Address </label>
-                                        <p class="block text-lg font-medium text-gray-700"> - </p>
-                                    </div>
-                                    <div class="sm:col-span-5">
-                                        <label for="state" class="block text-sm font-medium text-gray-700"> State </label>
-                                        <p class="block text-lg font-medium text-gray-700"> East Java </p>
-                                    </div>
-                                    <div class="sm:col-span-5">
-                                        <label for="city" class="block text-sm font-medium text-gray-700"> City </label>
-                                        <p class="block text-lg font-medium text-gray-700"> Malang </p>
-                                    </div>
-                                    <div class="sm:col-span-5">
-                                        <label for="zip_code" class="block text-sm font-medium text-gray-700"> Zip </label>
-                                        <p class="block text-lg font-medium text-gray-700"> 65199 </p>
-                                    </div>
-                                    <br>
-                                    <div class="sm:col-span-5">
-                                        <label class="block text-2xl font-medium text-gray-700"> Photo </label>
-                                    </div>
-                                    <img src="" alt="">
-                                    <br>
-                                    <div class="sm:col-span-5">
-                                        <label class="block text-2xl font-medium text-gray-700"> Verification </label>
-                                    </div>
-                                    <div class="sm:col-span-5">
-                                        <select name="verification" class="block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                            <option>Verified</option>
-                                            <option>Unverified</option>
-                                        </select>
-                                    </div>
-                                </div>
                                 <div class="pt-5">
                                     <div class="flex justify-end">
                                         <button type="submit" class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">Done</button>
                                     </div>
                                 </div>
-                            </form> -->
+                                @endif
+                            </form>
+
                         </div>
                         <!-- /End replace -->
                     </div>

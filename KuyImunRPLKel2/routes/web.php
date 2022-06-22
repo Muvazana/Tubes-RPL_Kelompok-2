@@ -47,7 +47,7 @@ Route::group(['middleware' => ['auth.basic', 'role:super_admin']], function () {
 
 Route::group(['middleware' => ['auth.basic', 'role:admin']], function () {
     Route::get('/admin', "AdminController@index")->name("adminDashboard");
-    Route::get('/admin/schedule', "AdminController@schedule");
+    Route::get('/admin/schedule', "AdminController@schedule")->name('adminSchedule');
     Route::get('/admin/schedule/edit/{id}', "AdminController@editSchedule");
     Route::post('/admin/schedule/editAction/{id}', "AdminController@editScheduleAction");
     Route::get('/admin/schedule/delete/{id}', "AdminController@deleteSchedule");

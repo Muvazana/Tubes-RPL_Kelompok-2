@@ -7,6 +7,7 @@
 
 <body>
     @include('navbar')
+
     <div class="grid grid-cols-12 py-16">
         <div class="col-start-2 col-end-5">
             <p class="text-6xl text-red-400">Let We Take Care Your Health</p>
