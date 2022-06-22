@@ -993,6 +993,9 @@ input[type="range"]::-ms-fill-lower {
 .block {
   display: block;
 }
+.inline {
+  display: inline;
+}
 .flex {
   display: flex;
 }
