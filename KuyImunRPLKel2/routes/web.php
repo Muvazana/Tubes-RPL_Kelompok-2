@@ -49,6 +49,8 @@ Route::group(['middleware' => ['auth.basic', 'role:admin']], function () {
     Route::get('/admin', "AdminController@index")->name("adminDashboard");
     Route::get('/admin/schedule', "AdminController@schedule");
     Route::get('/admin/schedule/edit/{id}', "AdminController@editSchedule");
+    Route::post('/admin/schedule/editAction/{id}', "AdminController@editScheduleAction");
+    Route::get('/admin/schedule/delete/{id}', "AdminController@deleteSchedule");
     Route::get('/admin/vaccine', "AdminController@vaccine");
     Route::get('/admin/vaccine/add', "AdminController@addVaccine");
     Route::post('/admin/vaccine/addAction', "AdminController@addVaccineAction");
@@ -65,6 +67,7 @@ Route::group(['middleware' => ['auth.basic', 'role:admin']], function () {
 Route::group(['middleware' => ['auth.basic', 'role:member']], function () {
     Route::get('/member', "MemberController@index")->name("memberDashboard");
     Route::get('/member/schedule', "MemberController@schedule");
+    Route::post('/member/schedule/addAction', "MemberController@addScheduleAction");
 });
 
 Route::get('/notfound', function () {

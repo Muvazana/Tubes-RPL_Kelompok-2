@@ -26,13 +26,21 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @for ($i = 1; $i < 3; $i++) <tr class="bg-white border-collapse">
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">12-12-2222</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Khonsu</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Rumah Sakit Silent Hill</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">true</td>
+                            @if(count($data) == 0)
+                                <tr class="bg-white border-collapse">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900" colspan= "5"><center>No Data</center></td>
                                 </tr>
-                                @endfor
+                            @endif
+                            @foreach ($data as $item)
+                                <tr class="bg-white border-collapse">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $item->vaksination_date }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                        {{ empty($item->data_vaksin_id) ? '-': $item->data_vaksins->name}}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $item->vaksin_locations->address }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $item->status }}</td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                     <!-- end of table -->

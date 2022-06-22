@@ -31,11 +31,69 @@ class AdminController extends Controller
     //
     public function schedule()
     {
-        return view('admin.schedule');
+        $user_location_id = Auth::user()->user_admins->vaksin_location_id;
+        $data = VaksinLog::where('vaksin_location_id', $user_location_id)
+                ->where('status', 'pending')
+                ->whereHas('user_members', function($q){
+                    $q->where('status', 'verified');
+                })->get();
+        return view('admin.schedule')->with([
+            'data' => $data
+        ]);
     }
     public function editSchedule($id)
     {
-        return view('admin.schedule-edit');
+        try{
+            $user_location_id = Auth::user()->user_admins->vaksin_location_id;
+            $vaksins = VaksinStok::with(['data_vaksins'])
+                ->where('vaksin_location_id', $user_location_id)
+                ->get(); 
+            $data = VaksinLog::findOrFail($id); 
+        } catch (\Exception $exception) {
+            return redirect()->back()->withErrors(['msg' => $exception->getMessage()]);
+        }
+        return view('admin.schedule-edit')->with([
+            'vaksins' => $vaksins,
+            'data' => $data 
+        ]);
+    }
+    public function editScheduleAction(Request $request, $id){
+        try {
+            $request->validate([
+                'vaksin_stoks_id' => 'required',
+            ]);
+
+            DB::beginTransaction();
+            
+            $vaksinStok = VaksinStok::findOrFail($request->input('vaksin_stoks_id'));
+            $vaksinStok->update([
+                'stok' => $vaksinStok->stok - 1,
+            ]);
+            $vaksinLog = VaksinLog::findOrFail($id);
+            $vaksinLog->update([
+                'data_vaksin_id' => $vaksinStok->data_vaksin_id,
+                'status' => 'accepted',
+            ]);
+            DB::commit();
+        } catch (\Exception $exception) {
+            DB::rollback();
+            return redirect()->back()->withErrors(['msg' => $exception->getMessage()]);
+        }
+        return redirect()->back()->with(['success' => "edit Schedule Success!"]);
+    }
+    public function deleteSchedule(Request $request, $id){
+        try {
+            DB::beginTransaction();
+            $vaksinLog = VaksinLog::findOrFail($id);
+            $vaksinLog->update([
+                'status' => 'rejected',
+            ]);
+            DB::commit();
+        } catch (\Exception $exception) {
+            DB::rollback();
+            return redirect()->back()->withErrors(['msg' => $exception->getMessage()]);
+        }
+        return redirect()->back()->with(['success' => "edit Schedule Success!"]);
     }
 
     // 
@@ -195,6 +253,8 @@ class AdminController extends Controller
     //
     public function log()
     {
-        return view('admin.log');
+        $user_location_id = Auth::user()->user_admins->vaksin_location_id;
+        $data = VaksinLog::with(['data_vaksins'])->where('vaksin_location_id', $user_location_id)->get();
+        return view('admin.log')->with(['data' => $data]);
     }
 }
