@@ -7,8 +7,8 @@
 
 <body>
     <div class="grid grid-cols-2">
-        <div class="">
-            <img src="{{ url('images/banner.png') }}" alt="" width="" class="bg-cover h-screen w-full">
+        <div class="bg-cover h-screen bg-center" style="background-image: url({{ url('assets/hospital.jpg') }})">
+            <!-- <img src="{{ url('assets/hospital.jpg') }}" alt="" width="" class="bg-cover h-screen"> -->
         </div>
         <div class="flex justify-center h-full">
             <div class="z-10 m-auto static">
@@ -46,8 +46,7 @@
                                 <a href="" class="font-normal text-base text-green-600 justify-end hover:text-green-800">Forgot
                                     password?</a>
                             </div>
-                            <button type="submit" class="rounded text-white bg-cyan-600 w-full py-3 mt-7 hover:bg-cyan-700">Login
-                                now</button>
+                            <button type="submit" class="btn-login">Login now</button>
                         </form>
                         <p class="flex justify-center text-gray-500 font-normal pt-5">Dont have an account? &nbsp;<a href="/register" class="font-normal text-base text-blue-400 justify-end hover:text-blue-500">Register
                                 Now</a>
