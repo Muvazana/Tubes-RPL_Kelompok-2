@@ -1071,11 +1071,11 @@ input[type="range"]::-ms-fill-lower {
 .min-h-screen {
   min-height: 100vh;
 }
-.w-full {
-  width: 100%;
-}
 .w-\[355px\] {
   width: 355px;
+}
+.w-full {
+  width: 100%;
 }
 .w-5 {
   width: 1.25rem;
